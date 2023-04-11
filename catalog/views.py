@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .form import RenewBookForm
 # Create your views here.
 
-@login_required
+# @login_required
 def index(request):
     """View function for home page of site."""
 
@@ -44,7 +44,7 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
-@login_required
+# @login_required
 def book_func(request):
     book_=Book.objects.all()
     paginator=Paginator(book_,2)
@@ -59,7 +59,7 @@ def book_func(request):
 
 # def detail(request):
 #     return render(request, 'page.html')
-@login_required
+# @login_required
 def book_function(request,pk):
     book_=Book.objects.all()
     paginator=Paginator(book_,2)
@@ -82,7 +82,7 @@ class BookListView(generic.ListView):
 # def view_details(request, pk):
 #     book_details = Book.objects.get(pk=pk)
 #     return redirect(book_details.get_absolute_url())
-@login_required
+# @login_required
 def my_model_detail(request, pk):
     my_model = get_object_or_404(Book, pk=pk)
     context = {'my_model': my_model}
@@ -100,7 +100,7 @@ class AuthorListView(generic.ListView):
     queryset=Author.objects.all()
     template_name=os.path.join(ROOT_DIR, 'templates','author_list.html')
     paginate_by=1
-@login_required  
+# @login_required  
 def author_views(request,pk):
     author = get_object_or_404(Author, pk=pk)
     context = {'author': author}
@@ -176,7 +176,7 @@ def register_(request):
 #     else:
 #         return render(request,'login.html')
 
-@login_required
+# @login_required
 def renew_book_librarian(request, pk):
     book_instance=get_object_or_404(BookInstance, pk=pk)
     

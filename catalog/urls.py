@@ -32,5 +32,5 @@ urlpatterns=[
     path('book/update/<int:pk>',views.BookUpdate.as_view(),name='success-update'),
     path('book/delete/<int:pk>',views.BookDelete.as_view(),name='success-delete'),
     path('register/',views.register_,name='register'),
-#   path('login/',views.login,name='login'),
+#         path('login/',views.login,name='login'),
 ]
