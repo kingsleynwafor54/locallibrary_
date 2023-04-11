@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<h1>Local Library Home</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+
+  {% for bk in page_obj%}
+  {%  if page_obj.object_list %}
+  <div>
+  <ul>
+    <li>
+      <a href="{% url 'my_book_detail' pk=bk.pk %}">{{ bk.title }}</a> ({{bk.author}})
+    </li>
+    <li><strong>Title:</strong> {{ bk.title }}</li>
+    <li><strong>Author:</strong> {{ bk.author }}</li>
+    <li><strong>genre:</strong> {{ bk.genre.name }}</li>
+ 
+    
+    {% endif %}
+  </ul>
+</div>
+{% endfor%}
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+{% comment %} {% endfor %}
+{% if page_obj.has_previous %}
+        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+{% endif %}
+                <span class="page-current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+
+{% if page_obj.has_next %}
+<a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+{% endif %} {% endcomment %}
+{%endblock%}
+

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Title: {{ my_model.title }}</h1>
+
+  <p><strong>Author:</strong> <a href="">{{ my_model.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Summary:</strong> {{ my_model.summary }}</p>
+  <p><strong>ISBN:</strong> {{ my_model.isbn }}</p>
+  <p><strong>Language:</strong> {{ my_model.language }}</p>
+  <p><strong>Genre:</strong> {{ my_model.genre.all|join:", " }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copies</h4>
+
+    {% for copy in  my_model.bookinstance_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+        {{ copy.get_status_display }}
+      </p>
+      {% if copy.status != 'a' %}
+        <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
+      {% endif %}
+      <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
+      <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<ul>
+    <li><strong>Book Title:</strong> {{ my_model.title}}</li>
+    <li><strong>Book Author:</strong> {{ my_model.author }}</li>
+    <li><strong>Book Summary:</strong> {{ my_model.summary}}</li>
+    <li><strong>Book Genres:</strong> {{ my_model.genre }}</li>
+    <li><strong>Book ISBN:</strong> {{ my_model.isbn}}</li> 
+    <li><strong>Language:</strong> {{ my_model.language}}</li> 
+  </ul>
+{% endblock %} {% endcomment %}
